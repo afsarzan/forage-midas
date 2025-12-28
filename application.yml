@@ -12,6 +12,24 @@ spring:
       properties:
         # Trust the package where your Transaction class is located
         spring.json.trusted.packages: "com.jpmc.midascore.foundation"
+  datasource:
+    # This names the database so the H2 console can find it
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      # Enables the web interface at /h2-console
+      enabled: true
+      # Ensures the database name is consistent
+      settings:
+        web-allow-others: true
+  jpa:
+    # Helps with debugging by showing SQL in logs
+    show-sql: true
+    hibernate:
+      ddl-auto: update
 
 # Keep your existing general configuration
 General:

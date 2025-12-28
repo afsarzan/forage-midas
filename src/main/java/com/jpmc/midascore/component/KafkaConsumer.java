@@ -7,9 +7,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class KafkaConsumer {
 
+    public final DatabaseConduit databaseConduit;
+
+    public KafkaConsumer( DatabaseConduit databaseConduit) {
+        this.databaseConduit = databaseConduit;
+    }
+
     @KafkaListener(topics = "${general.kafka-topic}", groupId = "midas-core-consumer")
     public void listen(Transaction transaction) {
-        // You can add a print statement here to see the transactions in the console
-        System.out.println("Received: " + transaction);
+        databaseConduit.processTransaction(transaction);
     }
 }
