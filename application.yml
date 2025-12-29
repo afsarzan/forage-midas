@@ -34,3 +34,6 @@ spring:
 # Keep your existing general configuration
 General:
   kafka-topic: trader-updates
+
+server:
+  port: 33400

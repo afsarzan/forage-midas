@@ -2,6 +2,7 @@ package com.jpmc.midascore.component;
 
 import com.jpmc.midascore.entity.TransactionRecord;
 import com.jpmc.midascore.entity.UserRecord;
+import com.jpmc.midascore.foundation.Balance;
 import com.jpmc.midascore.foundation.Incentive;
 import com.jpmc.midascore.foundation.Transaction;
 import com.jpmc.midascore.repository.TransactionRepository;
@@ -50,6 +51,14 @@ public class DatabaseConduit {
     }
     public void save(UserRecord userRecord) {
         userRepository.save(userRecord);
+    }
+
+    public Balance getUserBalance(long userId) {
+        UserRecord user = userRepository.findById(userId);
+        if (user != null) {
+            return new Balance(user.getBalance());
+        }
+        return new Balance(0);
     }
 }
 
